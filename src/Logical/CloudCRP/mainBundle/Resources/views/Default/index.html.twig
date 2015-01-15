@@ -1,0 +1,31 @@
+{% extends '::base.html.twig' %}
+{% block body %}
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Selección de empresa</h3>
+        </div>
+        <div class="panel-body">
+            <div class="well well-lg">
+                {% if ( data.empresas is defined) %}
+                    <form class="form-inline" method="post" action="{{ path('lcc_main_establecer_empresa') }}">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon">Empresa</div>
+                                <select  name="id_empresa" class="form-control">
+                                    {% for empresa in data.empresas %}
+                                        <option value="{{empresa.id}}">{{empresa.razonSocial}} ( {{ empresa.nombre }})</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Establecer</button>
+                    </form>
+                {% else %}
+                    <p class="text-danger">No hay empresas asignadas a su usuario.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+
+{% endblock body %}

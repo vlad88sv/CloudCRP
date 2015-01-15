@@ -1,0 +1,47 @@
+lcc_main_empresas:
+    resource: "@LCCMainBundle/Resources/config/routing/empresas.yml"
+    prefix:   /empresas
+
+lcc_catCuenta_index:
+    pattern:  /catCuenta
+    defaults: { _controller: LCCMainBundle:catCuenta:index }
+
+lcc_catCuenta_new:
+    pattern:  /catCuenta/nuevo
+    defaults: { _controller: LCCMainBundle:catCuenta:new }
+
+lcc_catCuenta_edit:
+    pattern:  /catCuenta/editar/{id}
+    defaults: { _controller: LCCMainBundle:catCuenta:edit }
+
+lcc_catCuenta_show:
+    pattern:  /catCuenta/mostrar/{id}
+    defaults: { _controller: LCCMainBundle:catCuenta:show }
+
+lcc_accesos:
+    pattern:  /admin/accesos
+    defaults: { _controller: LCCMainBundle:accesos:index }
+
+lcc_accesos_guardar:
+    pattern:  /admin/accesos/guardar
+    defaults: { _controller: LCCMainBundle:accesos:save }
+
+lcc_main_homepage:
+    pattern:  /
+    defaults: { _controller: LCCMainBundle:Default:index }
+
+lcc_main_establecer_empresa:
+    pattern:  /cambioEmpresa
+    defaults: { _controller: LCCMainBundle:Default:cambioEmpresa }
+
+lcc_partida_new:
+    path:     /partida/nueva
+    defaults: { _controller: LCCMainBundle:partida:new }
+
+lcc_partida_edit:
+    path:     /partida/editar
+    defaults: { _controller: LCCMainBundle:partida:edit }
+
+lcc_partida_show:
+    path:     /partida/mostrar
+    defaults: { _controller: LCCMainBundle:partida:show }

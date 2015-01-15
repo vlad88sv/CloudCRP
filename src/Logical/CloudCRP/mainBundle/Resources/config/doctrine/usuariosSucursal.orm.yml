@@ -1,0 +1,15 @@
+Logical\CloudCRP\mainBundle\Entity\usuariosSucursal:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    manyToOne:
+        sucursal:
+            targetEntity: sucursales
+        usuario:
+            targetEntity: User
+    lifecycleCallbacks: {  }

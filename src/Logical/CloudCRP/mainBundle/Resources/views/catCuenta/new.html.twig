@@ -1,0 +1,66 @@
+{% extends '::base.html.twig' %}
+{% block page_sub_header %}Catálogo de empresa {{ empresa }}{% endblock %}
+{% block body -%}
+    <form method="post" action="{{ path("lcc_catCuenta_new")  }}">
+        <div class="form-group">
+            <label for="exampleInputEmail1">Cuenta de agrupacion</label>
+            <select class="form-control" name="cmbCuentaAgrupacion" id="cmbCuentaAgrupacion">
+                <option value="0">Sin cuenta de agrupacion</option>
+                {% for cuenta in data.cuentas %}
+                    <option value="{{cuenta.id}}">{{cuenta.codigo}} :: {{cuenta.nombre}}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-6">
+            <label for="exampleInputPassword1">Tipo de cuenta</label>
+            <select class="form-control" name="cmbTipoCuenta" id="cmbCuentaAgrupacion">
+                {% for tipo in data.tipos %}
+                    <option value="{{tipo.id}}">{{tipo.letra}} - {{tipo.nombre}}</option>
+                {% endfor %}
+            </select>
+            </div>
+            <div class="form-group col-sm-6">
+            <label for="exampleInputPassword1">Clasificación de cuenta</label>
+            <select class="form-control" name="cmbClasficacionCuenta" id="cmbCuentaAgrupacion">
+                {% for clase in data.clases %}
+                    <option value="{{clase.id}}">{{clase.letra}} - {{clase.nombre}}</option>
+                {% endfor %}
+            </select>
+            </div>
+        </div>
+            
+        <div class="form-group">
+            <label for="exampleInputPassword1">Código de cuenta</label>
+            <input type="text" class="form-control" placeholder="">
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputPassword1">Nombre de cuenta</label>
+            <input type="text" class="form-control" placeholder="">
+        </div>
+            
+        <div class="form-group">
+            <label for="exampleInputPassword1">Comentario</label>
+            <input type="text" class="form-control" placeholder="">
+        </div>
+            
+        <div class="form-group">
+            <label for="exampleInputPassword1">Moneda</label>
+            <select class="form-control">
+                <option value="$">$ USD</option>
+                <option value="€">€ Euro</option>
+                <option value="¥">¥ Yen</option>
+                <option value="£">£ Libra esterlina</option>
+            </select>
+        </div>
+            
+        <div class="form-group">
+            <label for="exampleInputPassword1">Saldo inicial</label>
+            <input min="0" type="number" class="form-control" value="0">
+        </div>
+            
+        <button type="submit" class="btn btn-default">Guardar cuenta</button>
+    </form>
+{% endblock %}

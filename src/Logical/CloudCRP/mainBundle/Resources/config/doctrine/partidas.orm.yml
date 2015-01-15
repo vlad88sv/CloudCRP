@@ -1,0 +1,20 @@
+Logical\CloudCRP\mainBundle\Entity\partidas:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        codigo:
+            type: string
+            length: '50'
+        fecha:
+            type: date
+
+    manyToOne:
+        cuenta:
+            targetEntity: cuentas
+    lifecycleCallbacks: {  }

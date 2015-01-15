@@ -1,0 +1,19 @@
+Logical\CloudCRP\mainBundle\Entity\cuentasClase:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        nombre:
+            type: string
+            length: '100'
+        letra:
+            type: string
+            length: '1'
+        activo:
+            type: boolean
+    lifecycleCallbacks: {  }

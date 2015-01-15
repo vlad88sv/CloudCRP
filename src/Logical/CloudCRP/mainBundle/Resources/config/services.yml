@@ -1,0 +1,7 @@
+parameters:
+#    lcc_main.example.class: Logical\CloudCRP\mainBundle\Example
+
+services:
+#    lcc_main.example:
+#        class: %lcc_main.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

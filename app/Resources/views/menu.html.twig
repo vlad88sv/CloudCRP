@@ -1,0 +1,75 @@
+<ul class="nav" id="side-menu">
+    <li class="sidebar-search">
+        <div class="input-group custom-search-form">
+            <input type="text" class="form-control" placeholder="Search...">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button">
+                    <i class="fa fa-search"></i>
+                </button>
+            </span>
+        </div>
+        <!-- /input-group -->
+    </li>
+    <li>
+        <a href="{{ path("lcc_main_homepage") }}"><i class="fa fa-dashboard fa-fw"></i> Inicio</a>
+    </li>
+    <li>
+        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Reportes<span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level">
+            <li>
+                <a href="flot.html">T Diario</a>
+            </li>
+            <li>
+                <a href="morris.html">T Mayor</a>
+            </li>
+        </ul>
+        <!-- /.nav-second-level -->
+    </li>
+    <li>
+        <a href="#"><i class="fa fa-table fa-fw"></i> Catálogo de cuentas<span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level">
+            <li>
+                <a href="{{ path ('lcc_catCuenta_index') }}">Listado</a>
+            </li>
+            <li>
+                <a href="{{ path ('lcc_catCuenta_new') }}">Crear</a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href="#"><i class="fa fa-edit fa-fw"></i> Partidas contables<span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level">
+            <li>
+                <a href="#">Listado</a>
+            </li>
+            <li>
+                <a href="{{ path('lcc_partida_new')}}">Crear</a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href="#"><i class="fa fa-sitemap fa-fw"></i>Sucursales</a>
+    </li>
+    <li>
+        <a href="#"><i class="fa fa-files-o fa-fw"></i> Respaldos</a>
+    </li>
+    <li>
+        <a href="#"><i class="fa fa-wrench fa-fw"></i> Ajustes<span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level">
+            <li>
+                <a href="panels-wells.html">Usuarios</a>
+            </li>
+            <li>
+                <a href="{{ path('lcc_accesos') }}">Accesos</a>
+            </li>
+
+            <li>
+                <a href="buttons.html">Empresas</a>
+            </li>
+            <li>
+                <a href="buttons.html">Sucursales</a>
+            </li>
+        </ul>
+        <!-- /.nav-second-level -->
+    </li>
+</ul>

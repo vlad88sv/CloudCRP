@@ -1,0 +1,34 @@
+Logical\CloudCRP\mainBundle\Entity\transacciones:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        concepto1:
+            type: string
+            length: '255'
+        concepto2:
+            type: string
+            length: '255'
+        concepto3:
+            type: string
+            length: '255'
+        monto:
+            type: decimal
+        tipo:
+            type: boolean # 0 = debe | 1 = haber
+        eliminado:
+            type: boolean
+    
+    manyToOne:
+        partida:
+            targetEntity: partidas
+        sucursal:
+            targetEntity: sucursales
+        creadoPor:
+            targetEntity: User
+    lifecycleCallbacks: {  }

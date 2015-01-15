@@ -1,0 +1,195 @@
+<?php
+
+namespace Logical\CloudCRP\mainBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * movimientos
+ */
+class movimientos
+{
+    /**
+     * @var integer
+     */
+    private $id;
+
+    /**
+     * @var string
+     */
+    private $debe;
+
+    /**
+     * @var string
+     */
+    private $haber;
+
+    /**
+     * @var boolean
+     */
+    private $eliminado;
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set debe
+     *
+     * @param string $debe
+     * @return movimientos
+     */
+    public function setDebe($debe)
+    {
+        $this->debe = $debe;
+
+        return $this;
+    }
+
+    /**
+     * Get debe
+     *
+     * @return string 
+     */
+    public function getDebe()
+    {
+        return $this->debe;
+    }
+
+    /**
+     * Set haber
+     *
+     * @param string $haber
+     * @return movimientos
+     */
+    public function setHaber($haber)
+    {
+        $this->haber = $haber;
+
+        return $this;
+    }
+
+    /**
+     * Get haber
+     *
+     * @return string 
+     */
+    public function getHaber()
+    {
+        return $this->haber;
+    }
+
+    /**
+     * Set eliminado
+     *
+     * @param boolean $eliminado
+     * @return movimientos
+     */
+    public function setEliminado($eliminado)
+    {
+        $this->eliminado = $eliminado;
+
+        return $this;
+    }
+
+    /**
+     * Get eliminado
+     *
+     * @return boolean 
+     */
+    public function getEliminado()
+    {
+        return $this->eliminado;
+    }
+    /**
+     * @var \Logical\CloudCRP\mainBundle\Entity\cuentas
+     */
+    private $cuenta;
+
+
+    /**
+     * Set cuenta
+     *
+     * @param \Logical\CloudCRP\mainBundle\Entity\cuentas $cuenta
+     * @return movimientos
+     */
+    public function setCuenta(\Logical\CloudCRP\mainBundle\Entity\cuentas $cuenta = null)
+    {
+        $this->cuenta = $cuenta;
+
+        return $this;
+    }
+
+    /**
+     * Get cuenta
+     *
+     * @return \Logical\CloudCRP\mainBundle\Entity\cuentas 
+     */
+    public function getCuenta()
+    {
+        return $this->cuenta;
+    }
+    /**
+     * @var \Logical\CloudCRP\mainBundle\Entity\sucursales
+     */
+    private $sucursal;
+
+
+    /**
+     * Set sucursal
+     *
+     * @param \Logical\CloudCRP\mainBundle\Entity\sucursales $sucursal
+     * @return movimientos
+     */
+    public function setSucursal(\Logical\CloudCRP\mainBundle\Entity\sucursales $sucursal = null)
+    {
+        $this->sucursal = $sucursal;
+
+        return $this;
+    }
+
+    /**
+     * Get sucursal
+     *
+     * @return \Logical\CloudCRP\mainBundle\Entity\sucursales 
+     */
+    public function getSucursal()
+    {
+        return $this->sucursal;
+    }
+    /**
+     * @var \Logical\CloudCRP\mainBundle\Entity\User
+     */
+    private $creadoPor;
+
+
+    /**
+     * Set creadoPor
+     *
+     * @param \Logical\CloudCRP\mainBundle\Entity\User $creadoPor
+     * @return movimientos
+     */
+    public function setCreadoPor(\Logical\CloudCRP\mainBundle\Entity\User $creadoPor = null)
+    {
+        $this->creadoPor = $creadoPor;
+
+        return $this;
+    }
+
+    /**
+     * Get creadoPor
+     *
+     * @return \Logical\CloudCRP\mainBundle\Entity\User 
+     */
+    public function getCreadoPor()
+    {
+        return $this->creadoPor;
+    }
+}

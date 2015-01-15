@@ -1,0 +1,36 @@
+Logical\CloudCRP\mainBundle\Entity\empresas:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        nombre:
+            type: string
+            length: 255
+        razonSocial:
+            type: string
+            length: 255
+        registroIva:
+            type: string
+            length: '60'
+        nit:
+            type: string
+            length: '30'
+        direccion1:
+            type: string
+            length: 255
+        direccion2:
+            type: string
+            length: 255
+        activo:
+            type: boolean
+    manyToOne:
+        tipo:
+            targetEntity: empresasTipo
+        creadoPor:
+            targetEntity: User
+    lifecycleCallbacks: {  }

@@ -1,0 +1,33 @@
+Logical\CloudCRP\mainBundle\Entity\cuentas:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        codigo:
+            type: string
+            length: '100'
+        nombre:
+            type: string
+            length: 255
+        comentario:
+            type: string
+            length: 255
+        activo:
+            type: boolean
+    manyToOne:
+        cuentaAgrupacion:
+            targetEntity: cuentas
+        empresa:
+            targetEntity: empresas
+        clase:
+            targetEntity: cuentasClase
+        tipo:
+            targetEntity: cuentasTipo
+        creadoPor:
+            targetEntity: User
+    lifecycleCallbacks: {  }

@@ -1,0 +1,71 @@
+{% extends '::base.html.twig' %}
+{% block page_sub_header %}Permisos de acceso a sucursal por usuario{% endblock %}
+{% block body %}
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Crear un nuevo permiso</h3>
+        </div>
+        <div class="panel-body">
+            <div class="well well-lg">
+                {% if ( data.sucursales is defined) %}
+                    <form class="form-inline" action="{{ path('lcc_accesos_guardar') }}" method="post">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon">Sucursal</div>
+                                <select name="id_sucursal" class="form-control">
+                                    {% for sucursal in data.sucursales %}
+                                        <option value="">- seleccionar -</option>
+                                        <option value="{{ sucursal.id }}">{{sucursal.nombre}} de {{sucursal.empresa.razonSocial}} ( {{ sucursal.empresa.nombre }})  </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <div class="input-group-addon">Usuario</div>
+                                <select name="id_usuario" class="form-control">
+                                    {% for usuario in data.usuarios %}
+                                        <option value="">- seleccionar -</option>
+                                        <option value="{{ usuario.id }}">{{usuario.username}} ({{usuario.email}}) </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Crear permiso</button>
+                    </form>
+                {% else %}
+                    <p class="text-danger">No hay empresas en el sistema.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Lista de permisos activos</h3>
+        </div>
+        <div class="panel-body">
+            <div class="well well-lg">
+                {% if ( data.permisos is defined and data.permisos|length > 0) %}
+                    {#{{ dump(data.permisos) }}#}
+                    <table class="table table-responsive">
+                        <thead>
+                            <th>Usuario</th>
+                            <th>Sucursal</th>
+                            <th>Accion</th>
+                        </thead>
+                        {% for permiso in data.permisos %}
+                            <tr>
+                                <td>{{ permiso.sucursal.nombre}} de {{ permiso.sucursal.empresa.razonSocial}} ( {{ permiso.sucursal.empresa.nombre }})</td>
+                                <td>{{ permiso.usuario.username}} ({{ permiso.usuario.email}}) </td>
+                                <td><button class="btn btn-danger">Eliminar</button></td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                        
+                {% else %}
+                    <p class="text-danger">No hay permisos activos.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+{% endblock body %}

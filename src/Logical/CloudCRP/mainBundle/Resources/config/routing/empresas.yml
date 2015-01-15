@@ -1,0 +1,30 @@
+empresas:
+    path:     /
+    defaults: { _controller: "LCCMainBundle:empresas:index" }
+
+empresas_show:
+    path:     /{id}/show
+    defaults: { _controller: "LCCMainBundle:empresas:show" }
+
+empresas_new:
+    path:     /new
+    defaults: { _controller: "LCCMainBundle:empresas:new" }
+
+empresas_create:
+    path:     /create
+    defaults: { _controller: "LCCMainBundle:empresas:create" }
+    requirements: { _method: post }
+
+empresas_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LCCMainBundle:empresas:edit" }
+
+empresas_update:
+    path:     /{id}/update
+    defaults: { _controller: "LCCMainBundle:empresas:update" }
+    requirements: { _method: post|put }
+
+empresas_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LCCMainBundle:empresas:delete" }
+    requirements: { _method: post|delete }
