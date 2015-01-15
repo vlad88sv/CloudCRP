@@ -2,26 +2,30 @@
 
 namespace Logical\CloudCRP\mainBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Entity\User as BaseUser;
 
 /**
  * User
  */
-class User
-{
+class User extends BaseUser {
+
+    public function __construct() {
+        parent::__construct();
+        // your own logic
+    }
+
     /**
      * @var integer
      */
-    private $id;
-
+    protected $id;
 
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
+
 }
