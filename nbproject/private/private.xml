@@ -4,18 +4,13 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/vladimir/NetBeansProjects/CloudCRP/src/Logical/CloudCRP/mainBundle/Resources/views/catCuenta/new.html.twig</file>
-            <file>file:/home/vladimir/NetBeansProjects/CloudCRP/src/Logical/CloudCRP/mainBundle/Resources/config/doctrine/empresas.orm.yml</file>
-            <file>file:/home/vladimir/NetBeansProjects/CloudCRP/src/Logical/CloudCRP/mainBundle/Resources/config/doctrine/usuariosSucursal.orm.yml</file>
-            <file>file:/home/vladimir/NetBeansProjects/CloudCRP/app/Resources/views/base.html.twig</file>
-            <file>file:/home/vladimir/NetBeansProjects/CloudCRP/src/Logical/CloudCRP/mainBundle/Resources/config/doctrine/transacciones.orm.yml</file>
-            <file>file:/home/vladimir/NetBeansProjects/CloudCRP/src/Logical/CloudCRP/mainBundle/Resources/views/empresas/index.html.twig</file>
-            <file>file:/home/vladimir/NetBeansProjects/CloudCRP/src/Logical/CloudCRP/mainBundle/Resources/views/catCuenta/show.html.twig</file>
-            <file>file:/home/vladimir/NetBeansProjects/CloudCRP/src/Logical/CloudCRP/mainBundle/Resources/config/doctrine/partidas.orm.yml</file>
+            <file>file:/home/vladimir/NetBeansProjects/CloudCRP/src/Logical/CloudCRP/mainBundle/Resources/config/doctrine/User.orm.yml</file>
+            <file>file:/home/vladimir/NetBeansProjects/CloudCRP/app/AppKernel.php</file>
             <file>file:/home/vladimir/NetBeansProjects/CloudCRP/src/Logical/CloudCRP/mainBundle/Resources/views/partida/new.html.twig</file>
-            <file>file:/home/vladimir/NetBeansProjects/CloudCRP/app/Resources/views/menu.html.twig</file>
-            <file>file:/home/vladimir/NetBeansProjects/CloudCRP/src/Logical/CloudCRP/mainBundle/Resources/config/doctrine/cuentas.orm.yml</file>
+            <file>file:/home/vladimir/NetBeansProjects/CloudCRP/composer.json</file>
             <file>file:/home/vladimir/NetBeansProjects/CloudCRP/src/Logical/CloudCRP/mainBundle/Controller/catCuentaController.php</file>
-            <file>file:/home/vladimir/NetBeansProjects/CloudCRP/src/Logical/CloudCRP/mainBundle/Resources/views/Default/index.html.twig</file>
+            <file>file:/home/vladimir/NetBeansProjects/CloudCRP/src/Logical/CloudCRP/mainBundle/Entity/User.php</file>
+            <file>file:/home/vladimir/NetBeansProjects/CloudCRP/app/config/config.yml</file>
         </group>
     </open-files>
 </project-private>
