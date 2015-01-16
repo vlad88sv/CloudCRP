@@ -15,6 +15,7 @@
         <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
 
         <!-- Custom CSS -->
+        <link href="{{asset('css/jquery-ui.min.css')}}" rel="stylesheet">
         <link href="{{asset('css/metisMenu.min.css')}}" rel="stylesheet">
         <link href="{{asset('css/sb-admin-2.css')}}" rel="stylesheet">
         <link href="{{asset('css/chosen.min.css')}}" rel="stylesheet">
@@ -292,6 +293,7 @@
 
     <!-- jQuery -->
     <script src="{{asset('js/jquery.js')}}"></script>
+    <script src="{{asset('js/jquery-ui.min.js')}}"></script>
     <script src="{{asset('js/chosen.jquery.min.js')}}"></script>
 
     <!-- Bootstrap Core JavaScript -->
@@ -302,6 +304,8 @@
     <script type="text/javascript">
         $('select.chosen').chosen({no_results_text: "Sin resultados"});
     </script>
+    
+    {% block javascripts %}{% endblock %}
 </body>
 
 </html>
