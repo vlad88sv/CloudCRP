@@ -7,7 +7,7 @@
 {% block body %}
     <div class="row">
         <div class="col-lg-4"  style="border-right: 1px solid lightblue;border-bottom: 1px solid lightblue; padding-bottom: 15px; margin-bottom: 15px;">    
-            <form>
+            <form id="frmTransaccion">
                 <fieldset>
                     <legend>Transaccion</legend>
 
@@ -152,6 +152,8 @@
                     concepto3: $("#txtConcepto3").val()
                 });
 
+                $("#frmTransaccion")[0].reset();
+                $(".chosen").val('').trigger("chosen:updated");
                 hacerCargarGridTransacciones();
             }
             
