@@ -276,4 +276,8 @@ class cuentas
     {
         return $this->creadoPor;
     }
+    
+    public function __toString() {
+        return $this->nombre . ' ( ' . $this->codigo . ' )';
+    }
 }

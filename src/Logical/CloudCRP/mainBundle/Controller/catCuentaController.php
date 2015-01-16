@@ -15,9 +15,7 @@ class catCuentaController extends Controller {
         $sEmpresa = $this->get('session')->get('global_empresa');
         $iEmpresa = $this->get('session')->get('global_empresa_id');
 
-        $data['cuentas'] = $em->createQuery("SELECT c FROM LCCMainBundle:cuentas c WHERE c.empresa = :id_empresa")->setParameter("id_empresa", $iEmpresa)->getResult();
-        $data['tipos'] = $em->createQuery("SELECT ct FROM LCCMainBundle:cuentasTipo ct")->getResult();
-        $data['clases'] = $em->createQuery("SELECT cc FROM LCCMainBundle:cuentasClase cc")->getResult();
+        $data['cuentas'] = $em->createQuery("SELECT c FROM LCCMainBundle:cuentas c WHERE c.empresa = :id_empresa ORDER BY c.codigo")->setParameter("id_empresa", $iEmpresa)->getResult();
 
         return $this->render('LCCMainBundle:catCuenta:index.html.twig', array('data' => $data, 'empresa' => $sEmpresa[0]['nombre']));
     }
