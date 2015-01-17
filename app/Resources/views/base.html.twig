@@ -45,9 +45,8 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="{{ path('lcc_main_homepage') }}">{% block page_header %}CloudCRP{% endblock %}</a>
-                    <a  href="{{ path("lcc_main_homepage") }}" class="navbar-brand" >
-                        
+                    <a class="navbar-brand" href="{{ path('lcc_main_homepage') }}">
+                        CloudCRP :: {{ render(controller('LCCMainBundle:layout:mostrarNombreEmpresa')) }}
                     </a>
                 </div>
                 <!-- /.navbar-header -->
@@ -304,8 +303,8 @@
     <script type="text/javascript">
         $('select.chosen').chosen({no_results_text: "Sin resultados"});
     </script>
-    
-    {% block javascripts %}{% endblock %}
+
+{% block javascripts %}{% endblock %}
 </body>
 
 </html>

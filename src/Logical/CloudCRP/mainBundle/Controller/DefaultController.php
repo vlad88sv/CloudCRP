@@ -23,7 +23,7 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         
         $this->get('session')->set('global_empresa_id', $request->request->get('id_empresa'));
-        $this->get('session')->set('global_empresa', $em->createQuery("SELECT e.nombre FROM LCCMainBundle:empresas e WHERE e.id = :id")->setParameter('id',  $request->request->get('id_empresa'))->getScalarResult());
+        $this->get('session')->set('global_empresa', $em->createQuery("SELECT CONCAT(e.razonSocial, ' ( ' , e.nombre, ' )') AS nombre FROM LCCMainBundle:empresas e WHERE e.id = :id")->setParameter('id',  $request->request->get('id_empresa'))->getScalarResult());
         
         $request->getSession()->getFlashBag()->add(
             'notice',
