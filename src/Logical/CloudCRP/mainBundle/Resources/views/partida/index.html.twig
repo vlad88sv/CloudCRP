@@ -1,0 +1,36 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}LCCMainBundle:partida:mostrar{% endblock %}
+
+{% block page_sub_header %}Partidas{% endblock %}
+
+{% block body %}
+
+    <form class="form-inline">
+        <div class="form-group">
+            <label class="sr-only" for="cmbSucursal">Sucursal</label>
+            <select name="cmbSucursal" class="form-control chosen" id="cmbSucursal" style="width: 300px;">
+                <option val="">Seleccione una sucursal</option>
+                {% for sucursal in data.sucursales %}
+                    <option value="{{sucursal.id}}">{{sucursal.nombre}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="sr-only" for="txtCodigoPartida">Código partida</label>
+            <input type="text" class="form-control" id="txtCodigoPartida" placeholder="Código partida">
+        </div>
+        <div class="form-group">
+            <label class="sr-only" for="txtPartidaFecha">Fecha</label>
+            <input type="text" class="form-control" id="txtPartidaFecha" placeholder="Fecha">
+        </div>
+        <button type="submit" class="btn btn-default">Búscar</button>
+    </form>
+{% endblock %}
+{% block javascripts %}
+    <script type="text/javascript">
+        $(function () {
+            $("#txtPartidaFecha").datepicker({changeMonth: true, changeYear: true, dateFormat: 'yy-mm-dd'});
+        });
+    </script>
+{% endblock %}

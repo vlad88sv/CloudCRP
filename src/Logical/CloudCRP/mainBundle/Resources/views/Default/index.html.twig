@@ -11,7 +11,7 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <div class="input-group-addon">Empresa</div>
-                                <select  name="id_empresa" class="form-control">
+                                <select  name="id_empresa" class="form-control chosen" style="width: 500px;">
                                     {% for empresa in data.empresas %}
                                         <option value="{{empresa.id}}">{{empresa.razonSocial}} ( {{ empresa.nombre }})</option>
                                     {% endfor %}

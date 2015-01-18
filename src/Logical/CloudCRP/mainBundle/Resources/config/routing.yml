@@ -34,6 +34,10 @@ lcc_main_establecer_empresa:
     pattern:  /cambioEmpresa
     defaults: { _controller: LCCMainBundle:Default:cambioEmpresa }
 
+lcc_partida:
+    path:     /partida
+    defaults: { _controller: LCCMainBundle:partida:index }
+
 lcc_partida_new:
     path:     /partida/nueva
     defaults: { _controller: LCCMainBundle:partida:new }

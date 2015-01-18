@@ -15,6 +15,7 @@ Logical\CloudCRP\mainBundle\Entity\partidas:
             type: date
 
     manyToOne:
-        cuenta:
-            targetEntity: cuentas
+        sucursal:
+            targetEntity: sucursales
+
     lifecycleCallbacks: {  }

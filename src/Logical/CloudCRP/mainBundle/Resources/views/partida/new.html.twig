@@ -52,7 +52,7 @@
                         <label for="txtConcepto1">Concepto 1</label>
                         <input type="text" name="txtConcepto1" id="txtConcepto1" class="form-control" placeholder="">
                     </div>
-                            
+
                     <div class="form-group">
                         <label for="txtConcepto2">Concepto 2</label>
                         <input type="text" name="txtConcepto2" id="txtConcepto2" class="form-control" placeholder="">
@@ -70,12 +70,25 @@
             <fieldset>
                 <legend>Datos de partida <button  type="submit" class="btn btn-danger pull-right">Guardar partida</button></legend>
                 <form class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-sm-1 control-label">
+                            <label for="txtConcepto3">Sucursal</label>
+                        </div>
+                        <div class="col-sm-11">
+                            <select name="cmbSucursal" class="form-control chosen" id="cmbSucursal">
+                                <option val="">Seleccione una sucursal</option>
+                                {% for sucursal in data.sucursales %}
+                                    <option value="{{sucursal.id}}">{{sucursal.nombre}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-sm-8">
                             <div class="form-group">
-                                <label for="inputEmail3" class="col-sm-2 control-label">No. Partida</label>
+                                <label for="inputEmail3" class="col-sm-2 control-label">Código</label>
                                 <div class="col-sm-10">
-                                    <input type="number" class="form-control" id="inputEmail3" placeholder="">
+                                    <input type="number" class="form-control" id="txtPartidaCodigo" placeholder="1">
                                 </div>
                             </div>
                         </div>
@@ -88,6 +101,7 @@
                             </div>
                         </div>
                     </div>
+                    <p id="msjNoTransacciones" class="bg-warning">No hay transacciones agregadas</p>
                     <table id="tblTransacciones" class="table table-striped table-condensed table-bordered table-condensed">
                         <thead>
                             <tr>
@@ -95,7 +109,8 @@
                             </tr>
                         </thead>
                         <tbody></tbody>
-                    </table>                    
+                    </table>    
+
                 </form>
             </fieldset>
         </div>
@@ -104,16 +119,22 @@
         {{ parent() }}
         <script type="text/javascript">
             var transacciones = [];
-
             function hacerCargarGridTransacciones()
             {
                 $('#tblTransacciones tbody tr').remove();
 
+                if (transacciones.length === 0) {
+                    $('#tblTransacciones').hide();
+                    $('#msjNoTransacciones').show();
+                    return;
+                } else {
+                    $('#tblTransacciones').show();
+                    $('#msjNoTransacciones').hide();
+                }
+
                 for (index = 0; index < transacciones.length; ++index) {
                     console.log(transacciones[index]);
-                    
                     var monto = parseFloat(transacciones[index]['monto']).toFixed(2);
-
                     var tr = $('<tr>').attr('rel', index);
                     tr.append($('<td>').html(transacciones[index]['cuenta']));
                     if (transacciones[index]['tipo'] === '1') {
@@ -123,7 +144,7 @@
                         tr.append($('<td>').html(monto));
                         tr.append($('<td>').html(''));
                     }
-                    
+
                     tr.append($('<td>').html('<button type="button" class="btn btn-sm btn-link btnEliminarTransaccion">Eliminar</button>'));
                     $('#tblTransacciones tbody').append(tr);
                 }
@@ -151,12 +172,11 @@
                     concepto2: $("#txtConcepto2").val(),
                     concepto3: $("#txtConcepto3").val()
                 });
-
                 $("#frmTransaccion")[0].reset();
-                $(".chosen").val('').trigger("chosen:updated");
+                $("#cmbCuentaAgrupacion.chosen").val('').trigger("chosen:updated");
                 hacerCargarGridTransacciones();
             }
-            
+
             function eliminarTransaccion() {
                 transacciones.splice(parseInt($(this).attr('rel')), 1);
                 hacerCargarGridTransacciones();
@@ -166,6 +186,7 @@
                 $("#txtPartidaFecha").datepicker({changeMonth: true, changeYear: true, dateFormat: 'yy-mm-dd'});
                 $("#btnAgregarTransaccion").click(hacerAgregarTransaccion);
                 $(document).on('click', '.btnEliminarTransaccion', eliminarTransaccion);
+                hacerCargarGridTransacciones();
             });
         </script>
     {% endblock %}

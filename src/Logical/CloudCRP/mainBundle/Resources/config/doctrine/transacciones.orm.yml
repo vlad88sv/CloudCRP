@@ -27,8 +27,9 @@ Logical\CloudCRP\mainBundle\Entity\transacciones:
     manyToOne:
         partida:
             targetEntity: partidas
-        sucursal:
-            targetEntity: sucursales
+        cuenta:
+            targetEntity: cuentas
+
         creadoPor:
             targetEntity: User
     lifecycleCallbacks: {  }

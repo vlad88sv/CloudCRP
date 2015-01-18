@@ -12,7 +12,7 @@
     <form method="post" action="{{ path("lcc_catCuenta_new")  }}">
         <div class="form-group">
             <label for="cmbCuentaAgrupacion">Cuenta de agrupacion</label>
-            <select class="form-control" name="cmbCuentaAgrupacion" id="cmbCuentaAgrupacion">
+            <select class="form-control chosen" name="cmbCuentaAgrupacion" id="cmbCuentaAgrupacion">
                 <option value="0">Sin cuenta de agrupacion</option>
                 {% for cuenta in data.cuentas %}
                     <option value="{{cuenta.id}}">{{cuenta.codigo}} - {{cuenta.nombre}}</option>
