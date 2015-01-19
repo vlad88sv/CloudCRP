@@ -108,4 +108,60 @@ class partidas
     {
         return $this->fecha;
     }
+    /**
+     * @var \Logical\CloudCRP\mainBundle\Entity\sucursales
+     */
+    private $sucursal;
+
+
+    /**
+     * Set sucursal
+     *
+     * @param \Logical\CloudCRP\mainBundle\Entity\sucursales $sucursal
+     * @return partidas
+     */
+    public function setSucursal(\Logical\CloudCRP\mainBundle\Entity\sucursales $sucursal = null)
+    {
+        $this->sucursal = $sucursal;
+
+        return $this;
+    }
+
+    /**
+     * Get sucursal
+     *
+     * @return \Logical\CloudCRP\mainBundle\Entity\sucursales 
+     */
+    public function getSucursal()
+    {
+        return $this->sucursal;
+    }
+    /**
+     * @var \DateTime
+     */
+    private $actualizado;
+
+
+    /**
+     * Set actualizado
+     *
+     * @param \DateTime $actualizado
+     * @return partidas
+     */
+    public function setActualizado($actualizado)
+    {
+        $this->actualizado = $actualizado;
+
+        return $this;
+    }
+
+    /**
+     * Get actualizado
+     *
+     * @return \DateTime 
+     */
+    public function getActualizado()
+    {
+        return $this->actualizado;
+    }
 }

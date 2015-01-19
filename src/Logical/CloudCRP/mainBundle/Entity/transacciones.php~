@@ -304,4 +304,32 @@ class transacciones
     {
         return $this->cuenta;
     }
+    /**
+     * @var \DateTime
+     */
+    private $creado;
+
+
+    /**
+     * Set creado
+     *
+     * @param \DateTime $creado
+     * @return transacciones
+     */
+    public function setCreado($creado)
+    {
+        $this->creado = $creado;
+
+        return $this;
+    }
+
+    /**
+     * Get creado
+     *
+     * @return \DateTime 
+     */
+    public function getCreado()
+    {
+        return $this->creado;
+    }
 }

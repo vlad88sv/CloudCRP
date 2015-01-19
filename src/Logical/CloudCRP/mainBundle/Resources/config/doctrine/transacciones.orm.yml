@@ -23,6 +23,8 @@ Logical\CloudCRP\mainBundle\Entity\transacciones:
             type: boolean # 0 = debe | 1 = haber
         eliminado:
             type: boolean
+        creado:
+            type: datetime
     
     manyToOne:
         partida:

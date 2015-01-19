@@ -35,10 +35,10 @@
                         <div class="col-sm-6"> 
                             <div class="form-group">
                                 <div>
-                                    <label for="cmbTipoMovimiento">Tipo de movimiento</label>
-                                    <select class="form-control" name="cmbTipoMovimiento" id="cmbTipoMovimiento">
+                                    <label for="cmbTipoTransaccion">Clase de movimiento</label>
+                                    <select class="form-control" name="cmbTipoTransaccion" id="cmbTipoTransaccion">
                                         <option value="0">Debe</option>
-                                        <option value="1">Haber</option>                    
+                                        <option value="1">Haber</option>
                                     </select>
                                 </div>
                             </div>
@@ -76,7 +76,7 @@
                         </div>
                         <div class="col-sm-11">
                             <select name="cmbPartidaSucursal" class="form-control chosen" id="cmbPartidaSucursal">
-                                <option val="">Seleccione una sucursal</option>
+                                <option value="">Seleccione una sucursal</option>
                                 {% for sucursal in data.sucursales %}
                                     <option value="{{sucursal.id}}">{{sucursal.nombre}}</option>
                                 {% endfor %}
@@ -153,12 +153,14 @@
             function hacerAgregarTransaccion(e) {
                 e.preventDefault();
                 if ($("#cmbCuenta").val() === "") {
+                    $("#cmbCuenta").trigger('chosen:activate');
                     alert("Debe seleccionar una cuenta.");
                     return;
                 }
 
                 if (parseInt($("#txtMonto").val()) <= 0)
                 {
+                    $("#txtMonto").focus();
                     alert("Debe ingresar un monto mayor que cero.");
                     return;
                 }
@@ -167,13 +169,13 @@
                     cuenta_id: $("#cmbCuenta").val(),
                     cuenta: $("#cmbCuenta :selected").text(),
                     monto: $("#txtMonto").val(),
-                    tipo: $("#cmbTipoMovimiento").val(),
+                    tipo: $("#cmbTipoTransaccion").val(),
                     concepto1: $("#txtConcepto1").val(),
                     concepto2: $("#txtConcepto2").val(),
                     concepto3: $("#txtConcepto3").val()
                 });
                 $("#frmTransaccion")[0].reset();
-                $("#cmbCuenta.chosen").val('').trigger("chosen:updated");
+                $("#cmbCuenta.chosen").trigger("chosen:updated");
                 hacerCargarGridTransacciones();
             }
 
@@ -181,27 +183,61 @@
                 transacciones.splice(parseInt($(this).attr('rel')), 1);
                 hacerCargarGridTransacciones();
             }
-            
+
             function iniciarEnvioPartida(e) {
                 e.preventDefault();
                 if (transacciones.length === 0) {
                     alert('Debe contar con al menos una transacción');
+                    return;
                 }
-                    
-                var datos = { 
+                
+                if ($('#txtPartidaCodigo').val() === "")
+                {
+                    $('#txtPartidaCodigo').focus();
+                    alert('Error: debe ingresar un codigo de partida.');
+                    return;
+                }
+
+                if ($('#txtPartidaFecha').val() === "")
+                {
+                    $('#txtPartidaFecha').focus();
+                    alert('Error: debe ingresar una fecha.');
+                    return;
+                }
+
+                if ($('#cmbPartidaSucursal').val() === "")
+                {
+                    $('#cmbPartidaSucursal').trigger('chosen:activate');
+                    alert('Error: debe seleccionar una sucursal.');
+                    return;
+                }
+
+                var datos = {
                     transacciones: transacciones,
                     partidaCodigo: $('#txtPartidaCodigo').val(),
                     partidaFecha: $('#txtPartidaFecha').val(),
                     partidaSucursal: $('#cmbPartidaSucursal').val()
                 };
-                $.post("{{ path('lcc_partida_new')}}", datos ) ;
+                $.post("{{ path('lcc_partida_new')}}", datos, function(retorno){
+                    
+                    if (retorno.error.toString() === '0')
+                    {
+                        transacciones = [];
+                        hacerCargarGridTransacciones();
+                        $("#frmCrearPartida")[0].reset();
+                        $("#cmbPartidaSucursal").trigger("chosen:updated");
+                        alert('Partida ingresada correctamente.');
+                    }
+                }, 'json');
             }
 
             $(function () {
                 $("#txtPartidaFecha").datepicker({changeMonth: true, changeYear: true, dateFormat: 'yy-mm-dd'});
                 $("#btnAgregarTransaccion").click(hacerAgregarTransaccion);
                 $("#frmCrearPartida").submit(iniciarEnvioPartida);
-                $("#guardarPartida").click(function(){$("#frmCrearPartida").submit();});
+                $("#guardarPartida").click(function () {
+                    $("#frmCrearPartida").submit();
+                });
                 $(document).on('click', '.btnEliminarTransaccion', eliminarTransaccion);
                 hacerCargarGridTransacciones();
             });

@@ -136,4 +136,60 @@ class partidas
     {
         return $this->sucursal;
     }
+    /**
+     * @var \DateTime
+     */
+    private $actualizado;
+
+
+    /**
+     * Set actualizado
+     *
+     * @param \DateTime $actualizado
+     * @return partidas
+     */
+    public function setActualizado($actualizado)
+    {
+        $this->actualizado = $actualizado;
+
+        return $this;
+    }
+
+    /**
+     * Get actualizado
+     *
+     * @return \DateTime 
+     */
+    public function getActualizado()
+    {
+        return $this->actualizado;
+    }
+    /**
+     * @var \DateTime
+     */
+    private $creado;
+
+
+    /**
+     * Set creado
+     *
+     * @param \DateTime $creado
+     * @return partidas
+     */
+    public function setCreado($creado)
+    {
+        $this->creado = $creado;
+
+        return $this;
+    }
+
+    /**
+     * Get creado
+     *
+     * @return \DateTime 
+     */
+    public function getCreado()
+    {
+        return $this->creado;
+    }
 }
