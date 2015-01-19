@@ -13,6 +13,9 @@
     <li>
         <a href="{{ path("lcc_main_homepage") }}"><i class="fa fa-dashboard fa-fw"></i> Inicio</a>
     </li>
+    {% set empresaEstablecida = render(controller('LCCMainBundle:layout:empresaEstablecida')) %}
+    
+    {% if (empresaEstablecida) %} 
     <li>
         <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Reportes<span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
@@ -40,13 +43,17 @@
         <a href="#"><i class="fa fa-edit fa-fw"></i> Partidas contables<span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
             <li>
-                <a href="{{ path('lcc_partida')}}">Listado</a>
+                <a href="{{ path('lcc_partida_codigo')}}">Búscar código</a>
+            </li>
+            <li>
+                <a href="{{ path('lcc_partida_fecha')}}">Búscar fecha</a>
             </li>
             <li>
                 <a href="{{ path('lcc_partida_new')}}">Crear</a>
             </li>
         </ul>
     </li>
+    {% endif %}
     <li>
         <a href="#"><i class="fa fa-sitemap fa-fw"></i>Sucursales</a>
     </li>
