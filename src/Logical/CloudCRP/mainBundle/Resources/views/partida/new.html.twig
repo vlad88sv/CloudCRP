@@ -13,8 +13,8 @@
 
                     <div class="form-group">
                         <div>
-                            <label for="cmbCuentaAgrupacion">Cuenta</label>
-                            <select class="form-control chosen" name="cmbCuentaAgrupacion" id="cmbCuentaAgrupacion">
+                            <label for="cmbCuenta">Cuenta</label>
+                            <select class="form-control chosen" name="cmbCuenta" id="cmbCuenta">
                                 <option value="">Seleccione una cuenta</option>
                                 {% for cuenta in data.cuentas %}
                                     <option value="{{cuenta.id}}">{{cuenta.codigo}} :: {{cuenta.nombre}}</option>
@@ -68,14 +68,14 @@
         </div>
         <div class="col-lg-8">
             <fieldset>
-                <legend>Datos de partida <button  type="submit" class="btn btn-danger pull-right">Guardar partida</button></legend>
-                <form class="form-horizontal">
+                <legend>Datos de partida <button id="guardarPartida" class="btn btn-danger pull-right">Guardar partida</button></legend>
+                <form id="frmCrearPartida" action="{{ path('lcc_partida_new')}}" method="post" class="form-horizontal">
                     <div class="form-group">
                         <div class="col-sm-1 control-label">
-                            <label for="txtConcepto3">Sucursal</label>
+                            <label for="cmbPartidaSucursal">Sucursal</label>
                         </div>
                         <div class="col-sm-11">
-                            <select name="cmbSucursal" class="form-control chosen" id="cmbSucursal">
+                            <select name="cmbPartidaSucursal" class="form-control chosen" id="cmbPartidaSucursal">
                                 <option val="">Seleccione una sucursal</option>
                                 {% for sucursal in data.sucursales %}
                                     <option value="{{sucursal.id}}">{{sucursal.nombre}}</option>
@@ -86,9 +86,9 @@
                     <div class="row">
                         <div class="col-sm-8">
                             <div class="form-group">
-                                <label for="inputEmail3" class="col-sm-2 control-label">Código</label>
+                                <label for="txtPartidaCodigo" class="col-sm-2 control-label">Código</label>
                                 <div class="col-sm-10">
-                                    <input type="number" class="form-control" id="txtPartidaCodigo" placeholder="1">
+                                    <input type="number" class="form-control" name="txtPartidaCodigo" id="txtPartidaCodigo" placeholder="1">
                                 </div>
                             </div>
                         </div>
@@ -152,7 +152,7 @@
 
             function hacerAgregarTransaccion(e) {
                 e.preventDefault();
-                if ($("#cmbCuentaAgrupacion").val() === "") {
+                if ($("#cmbCuenta").val() === "") {
                     alert("Debe seleccionar una cuenta.");
                     return;
                 }
@@ -164,8 +164,8 @@
                 }
 
                 transacciones.push({
-                    cuenta_id: $("#cmbCuentaAgrupacion").val(),
-                    cuenta: $("#cmbCuentaAgrupacion :selected").text(),
+                    cuenta_id: $("#cmbCuenta").val(),
+                    cuenta: $("#cmbCuenta :selected").text(),
                     monto: $("#txtMonto").val(),
                     tipo: $("#cmbTipoMovimiento").val(),
                     concepto1: $("#txtConcepto1").val(),
@@ -173,7 +173,7 @@
                     concepto3: $("#txtConcepto3").val()
                 });
                 $("#frmTransaccion")[0].reset();
-                $("#cmbCuentaAgrupacion.chosen").val('').trigger("chosen:updated");
+                $("#cmbCuenta.chosen").val('').trigger("chosen:updated");
                 hacerCargarGridTransacciones();
             }
 
@@ -181,10 +181,27 @@
                 transacciones.splice(parseInt($(this).attr('rel')), 1);
                 hacerCargarGridTransacciones();
             }
+            
+            function iniciarEnvioPartida(e) {
+                e.preventDefault();
+                if (transacciones.length === 0) {
+                    alert('Debe contar con al menos una transacción');
+                }
+                    
+                var datos = { 
+                    transacciones: transacciones,
+                    partidaCodigo: $('#txtPartidaCodigo').val(),
+                    partidaFecha: $('#txtPartidaFecha').val(),
+                    partidaSucursal: $('#cmbPartidaSucursal').val()
+                };
+                $.post("{{ path('lcc_partida_new')}}", datos ) ;
+            }
 
             $(function () {
                 $("#txtPartidaFecha").datepicker({changeMonth: true, changeYear: true, dateFormat: 'yy-mm-dd'});
                 $("#btnAgregarTransaccion").click(hacerAgregarTransaccion);
+                $("#frmCrearPartida").submit(iniciarEnvioPartida);
+                $("#guardarPartida").click(function(){$("#frmCrearPartida").submit();});
                 $(document).on('click', '.btnEliminarTransaccion', eliminarTransaccion);
                 hacerCargarGridTransacciones();
             });
