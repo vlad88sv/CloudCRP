@@ -28,10 +28,32 @@ class partidaController extends Controller {
         return $this->render('LCCMainBundle:partida:new.html.twig', array('data' => $data));
     }
 
-    public function editAction() {
-        return $this->render('LCCMainBundle:partida:edit.html.twig', array(
-                        // ...
-        ));
+    public function indexAction() {
+        $em = $this->getDoctrine()->getManager();
+        $data = array();
+        $iEmpresa = $this->get('session')->get('global_empresa_id');
+
+        $data['partidas'] = $em->createQuery("SELECT p FROM LCCMainBundle:partidas p WHERE p.sucursal IN (SELECT e.id FROM LCCMainBundle:empresas e WHERE e.id = :id_empresa ) ORDER BY p.creado")->setParameter("id_empresa", $iEmpresa)->getResult();
+
+        return $this->render('LCCMainBundle:partida:index.html.twig', array('data' => $data));
+    }
+
+    public function editAction(Request $request, $id) {
+        if ($request->isMethod('POST')) {
+            return new JsonResponse($this->runSave($request));
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $data = array();
+        $iEmpresa = $this->get('session')->get('global_empresa_id');
+
+        $data['cuentas'] = $em->createQuery("SELECT c FROM LCCMainBundle:cuentas c WHERE c.empresa = :id_empresa")->setParameter("id_empresa", $iEmpresa)->getResult();
+        $data['clases'] = $em->createQuery("SELECT cc FROM LCCMainBundle:cuentasClase cc")->getResult();
+        $data['sucursales'] = $em->createQuery("SELECT s FROM LCCMainBundle:sucursales s WHERE s.empresa = :id_empresa")->setParameter("id_empresa", $iEmpresa)->getResult();
+
+        $data['partida'] = $em->createQuery("SELECT p FROM LCCMainBundle:partidas p WHERE p.id = :id")->setParameter('id', $id)->getSingleResult();
+
+        return $this->render('LCCMainBundle:partida:new.html.twig', array('data' => $data));
     }
 
     public function buscarCodigoAction() {
@@ -60,30 +82,28 @@ class partidaController extends Controller {
         ));
     }
 
-    private function runSave(Request $request) {        
-        
-        if ( !is_array($request->get('transacciones')) || !count($request->get('transacciones')) )
-        {
-             return array('error' => 1);
+    private function runSave(Request $request) {
+
+        if (!is_array($request->get('transacciones')) || !count($request->get('transacciones'))) {
+            return array('error' => 1);
         }
-        
+
         $em = $this->getDoctrine()->getManager();
-        
+
         $partida = $em->getRepository('LCCMainBundle:partidas')->findOneBy(array('sucursal' => $request->get('partidaSucursal'), 'codigo' => $request->get('partidaCodigo')));
-        
-        if ($partida === null)
-        {
+
+        if ($partida === null) {
             $partida = new partidas();
             $partida->setSucursal($em->getRepository('LCCMainBundle:sucursales')->find($request->get('partidaSucursal')));
             $partida->setCodigo($request->get('partidaCodigo'));
-            $partida->setFecha( new \DateTime($request->get('partidaFecha')));
-            $partida->setCreado( new \DateTime() );
-            
+            $partida->setFecha(new \DateTime($request->get('partidaFecha')));
+            $partida->setCreado(new \DateTime());
+            $partida->setActivo(TRUE);
         }
-        $partida->setActualizado( new \DateTime());
-        $em->persist($partida);       
-        
-        foreach($request->get('transacciones') as $transaccion){
+        $partida->setActualizado(new \DateTime());
+        $em->persist($partida);
+
+        foreach ($request->get('transacciones') as $transaccion) {
             $docTransaccion = new transacciones();
             $docTransaccion->setPartida($partida);
             $docTransaccion->setCuenta($em->getRepository('LCCMainBundle:cuentas')->find($transaccion['cuenta_id']));
@@ -97,11 +117,11 @@ class partidaController extends Controller {
             $docTransaccion->setCreado(new \DateTime());
             $em->persist($docTransaccion);
         }
-        
+
         $em->flush();
         $em->clear();
-        
+
         return array('error' => 0);
-        
     }
+
 }

@@ -20,9 +20,29 @@ class partidas
     private $codigo;
 
     /**
-     * @var \Logical\CloudCRP\mainBundle\Entity\cuentas
+     * @var \DateTime
      */
-    private $cuenta;
+    private $fecha;
+
+    /**
+     * @var boolean
+     */
+    private $avtivo;
+
+    /**
+     * @var \DateTime
+     */
+    private $creado;
+
+    /**
+     * @var \DateTime
+     */
+    private $actualizado;
+
+    /**
+     * @var \Logical\CloudCRP\mainBundle\Entity\sucursales
+     */
+    private $sucursal;
 
 
     /**
@@ -59,34 +79,6 @@ class partidas
     }
 
     /**
-     * Set cuenta
-     *
-     * @param \Logical\CloudCRP\mainBundle\Entity\cuentas $cuenta
-     * @return partidas
-     */
-    public function setCuenta(\Logical\CloudCRP\mainBundle\Entity\cuentas $cuenta = null)
-    {
-        $this->cuenta = $cuenta;
-
-        return $this;
-    }
-
-    /**
-     * Get cuenta
-     *
-     * @return \Logical\CloudCRP\mainBundle\Entity\cuentas 
-     */
-    public function getCuenta()
-    {
-        return $this->cuenta;
-    }
-    /**
-     * @var \DateTime
-     */
-    private $fecha;
-
-
-    /**
      * Set fecha
      *
      * @param \DateTime $fecha
@@ -108,11 +100,75 @@ class partidas
     {
         return $this->fecha;
     }
-    /**
-     * @var \Logical\CloudCRP\mainBundle\Entity\sucursales
-     */
-    private $sucursal;
 
+    /**
+     * Set avtivo
+     *
+     * @param boolean $avtivo
+     * @return partidas
+     */
+    public function setAvtivo($avtivo)
+    {
+        $this->avtivo = $avtivo;
+
+        return $this;
+    }
+
+    /**
+     * Get avtivo
+     *
+     * @return boolean 
+     */
+    public function getAvtivo()
+    {
+        return $this->avtivo;
+    }
+
+    /**
+     * Set creado
+     *
+     * @param \DateTime $creado
+     * @return partidas
+     */
+    public function setCreado($creado)
+    {
+        $this->creado = $creado;
+
+        return $this;
+    }
+
+    /**
+     * Get creado
+     *
+     * @return \DateTime 
+     */
+    public function getCreado()
+    {
+        return $this->creado;
+    }
+
+    /**
+     * Set actualizado
+     *
+     * @param \DateTime $actualizado
+     * @return partidas
+     */
+    public function setActualizado($actualizado)
+    {
+        $this->actualizado = $actualizado;
+
+        return $this;
+    }
+
+    /**
+     * Get actualizado
+     *
+     * @return \DateTime 
+     */
+    public function getActualizado()
+    {
+        return $this->actualizado;
+    }
 
     /**
      * Set sucursal
@@ -137,59 +193,31 @@ class partidas
         return $this->sucursal;
     }
     /**
-     * @var \DateTime
+     * @var boolean
      */
-    private $actualizado;
+    private $activo;
 
 
     /**
-     * Set actualizado
+     * Set activo
      *
-     * @param \DateTime $actualizado
+     * @param boolean $activo
      * @return partidas
      */
-    public function setActualizado($actualizado)
+    public function setActivo($activo)
     {
-        $this->actualizado = $actualizado;
+        $this->activo = $activo;
 
         return $this;
     }
 
     /**
-     * Get actualizado
+     * Get activo
      *
-     * @return \DateTime 
+     * @return boolean 
      */
-    public function getActualizado()
+    public function getActivo()
     {
-        return $this->actualizado;
-    }
-    /**
-     * @var \DateTime
-     */
-    private $creado;
-
-
-    /**
-     * Set creado
-     *
-     * @param \DateTime $creado
-     * @return partidas
-     */
-    public function setCreado($creado)
-    {
-        $this->creado = $creado;
-
-        return $this;
-    }
-
-    /**
-     * Get creado
-     *
-     * @return \DateTime 
-     */
-    public function getCreado()
-    {
-        return $this->creado;
+        return $this->activo;
     }
 }

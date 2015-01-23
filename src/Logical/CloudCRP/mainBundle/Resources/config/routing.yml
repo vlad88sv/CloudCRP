@@ -38,6 +38,10 @@ lcc_partida_codigo:
     path:     /partida/buscar/codigo
     defaults: { _controller: LCCMainBundle:partida:buscarCodigo }
 
+lcc_partida:
+    path:     /partida
+    defaults: { _controller: LCCMainBundle:partida:index}
+
 lcc_partida_fecha:
     path:     /partida/buscar/fecha
     defaults: { _controller: LCCMainBundle:partida:buscarFecha }
@@ -47,7 +51,7 @@ lcc_partida_new:
     defaults: { _controller: LCCMainBundle:partida:new }
 
 lcc_partida_edit:
-    path:     /partida/editar
+    path:     /partida/editar/{id}
     defaults: { _controller: LCCMainBundle:partida:edit }
 
 lcc_partida_show:

@@ -4,6 +4,12 @@ security:
         FOS\UserBundle\Model\UserInterface: sha512
 
     role_hierarchy:
+        ROLE_CREAR_PARTIDAS: ROLE_VER_PARTIDAS
+        ROLE_EDITAR_PARTIDAS: ROLE_CREAR_PARTIDAS
+        
+        ROLE_CREAR_CUENTAS: ROLE_VER_CUENTAS
+        ROLE_EDITAR_CUENTAS: ROLE_CREAR_CUENTAS
+                
         ROLE_ADMIN:       ROLE_USER
         ROLE_SUPER_ADMIN: ROLE_ADMIN
 

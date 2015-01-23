@@ -20,9 +20,29 @@ class partidas
     private $codigo;
 
     /**
-     * @var \Logical\CloudCRP\mainBundle\Entity\cuentas
+     * @var \DateTime
      */
-    private $cuenta;
+    private $fecha;
+
+    /**
+     * @var boolean
+     */
+    private $avtivo;
+
+    /**
+     * @var \DateTime
+     */
+    private $creado;
+
+    /**
+     * @var \DateTime
+     */
+    private $actualizado;
+
+    /**
+     * @var \Logical\CloudCRP\mainBundle\Entity\sucursales
+     */
+    private $sucursal;
 
 
     /**
@@ -59,34 +79,6 @@ class partidas
     }
 
     /**
-     * Set cuenta
-     *
-     * @param \Logical\CloudCRP\mainBundle\Entity\cuentas $cuenta
-     * @return partidas
-     */
-    public function setCuenta(\Logical\CloudCRP\mainBundle\Entity\cuentas $cuenta = null)
-    {
-        $this->cuenta = $cuenta;
-
-        return $this;
-    }
-
-    /**
-     * Get cuenta
-     *
-     * @return \Logical\CloudCRP\mainBundle\Entity\cuentas 
-     */
-    public function getCuenta()
-    {
-        return $this->cuenta;
-    }
-    /**
-     * @var \DateTime
-     */
-    private $fecha;
-
-
-    /**
      * Set fecha
      *
      * @param \DateTime $fecha
@@ -108,39 +100,52 @@ class partidas
     {
         return $this->fecha;
     }
-    /**
-     * @var \Logical\CloudCRP\mainBundle\Entity\sucursales
-     */
-    private $sucursal;
-
 
     /**
-     * Set sucursal
+     * Set avtivo
      *
-     * @param \Logical\CloudCRP\mainBundle\Entity\sucursales $sucursal
+     * @param boolean $avtivo
      * @return partidas
      */
-    public function setSucursal(\Logical\CloudCRP\mainBundle\Entity\sucursales $sucursal = null)
+    public function setAvtivo($avtivo)
     {
-        $this->sucursal = $sucursal;
+        $this->avtivo = $avtivo;
 
         return $this;
     }
 
     /**
-     * Get sucursal
+     * Get avtivo
      *
-     * @return \Logical\CloudCRP\mainBundle\Entity\sucursales 
+     * @return boolean 
      */
-    public function getSucursal()
+    public function getAvtivo()
     {
-        return $this->sucursal;
+        return $this->avtivo;
     }
-    /**
-     * @var \DateTime
-     */
-    private $actualizado;
 
+    /**
+     * Set creado
+     *
+     * @param \DateTime $creado
+     * @return partidas
+     */
+    public function setCreado($creado)
+    {
+        $this->creado = $creado;
+
+        return $this;
+    }
+
+    /**
+     * Get creado
+     *
+     * @return \DateTime 
+     */
+    public function getCreado()
+    {
+        return $this->creado;
+    }
 
     /**
      * Set actualizado
@@ -163,5 +168,28 @@ class partidas
     public function getActualizado()
     {
         return $this->actualizado;
+    }
+
+    /**
+     * Set sucursal
+     *
+     * @param \Logical\CloudCRP\mainBundle\Entity\sucursales $sucursal
+     * @return partidas
+     */
+    public function setSucursal(\Logical\CloudCRP\mainBundle\Entity\sucursales $sucursal = null)
+    {
+        $this->sucursal = $sucursal;
+
+        return $this;
+    }
+
+    /**
+     * Get sucursal
+     *
+     * @return \Logical\CloudCRP\mainBundle\Entity\sucursales 
+     */
+    public function getSucursal()
+    {
+        return $this->sucursal;
     }
 }
