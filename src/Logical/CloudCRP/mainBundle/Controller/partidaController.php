@@ -92,7 +92,7 @@ class partidaController extends Controller {
                 ->getResult();
         }
         
-        if (count($data['transacciones'])) {
+        if (isset($data['transacciones']) && count($data['transacciones'])) {
             foreach ($data['transacciones'] as $transaccion)
             {
                 $data['cuadre'] += (double) $transaccion->getMonto() * ($transaccion->getTipo() ? 1 : -1) ;

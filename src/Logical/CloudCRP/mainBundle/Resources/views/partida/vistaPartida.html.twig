@@ -11,15 +11,15 @@
 <h3>Transacciones</h1>
 <table style="width:600px;border-collapse: collapse">
     <tr>
-        <th class="text-center" style="border:none;width:250px ">Cuenta</th>
+        <th class="text-center" style="border:none;width:200px;"></th>
         <th class="text-center" style="border:none;border-right: 1px solid grey; border-bottom: 1px solid grey;width:250px ">Debe</th>
         <th class="text-center"style="border:none;border-left: 1px solid grey; border-bottom: 1px solid grey;width:250px ">Haber</th>
     </tr>
     {% for transaccion in data.transacciones %}
     <tr>
-        <td class="text-right" style="border:none;border-right: 1px solid grey;padding-right:5px;">{{transaccion.cuenta.id}}. {{transaccion.cuenta.nombre}}</td>
-        <td class="text-center" style="border:none;border-right: 1px solid grey; ">{% if (transaccion.tipo == 0) %}{{transaccion.monto|number_format(2, '.', ',')}}{% endif %}</td>
-        <td class="text-center" style="border:none;border-left: 1px solid grey; ">{% if (transaccion.tipo == 1) %}{{transaccion.monto|number_format(2, '.', ',')}}{% endif %}</td>
+        <td class="text-right" style="border:none;border-right: 1px solid grey;padding-right:5px;border-bottom: 1px dashed #e4e4e2">{{transaccion.cuenta.id}}. {{transaccion.cuenta.nombre}}</td>
+        <td class="text-center" style="border:none;border-right: 1px solid grey;border-bottom: 1px dashed #e4e4e2; ">{% if (transaccion.tipo == 0) %}{{transaccion.monto|number_format(2, '.', ',')}}{% endif %}</td>
+        <td class="text-center" style="border:none;border-left: 1px solid grey;border-bottom: 1px dashed #e4e4e2;  ">{% if (transaccion.tipo == 1) %}{{transaccion.monto|number_format(2, '.', ',')}}{% endif %}</td>
         
     </tr>
     {% endfor %}
