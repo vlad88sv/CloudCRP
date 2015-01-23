@@ -270,10 +270,8 @@
                     $("#frmCrearPartida").submit();
                 });
                 $(document).on('click', '.btnEliminarTransaccion', eliminarTransaccion);
-            {% if (data.partida.id is defined) %}
 
-            {% endif %}
-                        hacerCargarGridTransacciones();
-                    });
+                hacerCargarGridTransacciones();
+            });
         </script>
     {% endblock %}

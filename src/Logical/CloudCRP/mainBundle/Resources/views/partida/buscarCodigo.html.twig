@@ -6,7 +6,7 @@
 
 {% block body %}
 
-    <form class="form-inline">
+    <form id="frmBuscarPartida" class="form-inline" method="post" action="{{ path('lcc_partida_buscar') }}">
         <div class="form-group">
             <label class="sr-only" for="cmbSucursal">Sucursal</label>
             <select name="cmbSucursal" class="form-control chosen" id="cmbSucursal" style="width: 300px;">
@@ -18,15 +18,25 @@
         </div>
         <div class="form-group">
             <label class="sr-only" for="txtCodigoPartida">Código partida</label>
-            <input type="text" class="form-control" id="txtCodigoPartida" placeholder="Código partida">
+            <input type="text" class="form-control" id="txtCodigoPartida" name="txtCodigoPartida" placeholder="Código partida">
         </div>
         <button type="submit" class="btn btn-default">Búscar</button>
     </form>
+    <div id="resultado" class="row" style="padding: 5px;"></div>
 {% endblock %}
 {% block javascripts %}
     <script type="text/javascript">
+        function procesarBusquedaPartida(e)
+        {
+            e.preventDefault();
+            $.post("{{ path('lcc_partida_buscar') }}", $("#frmBuscarPartida").serialize(), function(data) {
+                $("#resultado").html(data);
+            }, 'html' );
+        }
+        
         $(function () {
             $("#txtPartidaFecha").datepicker({changeMonth: true, changeYear: true, dateFormat: 'yy-mm-dd'});
+            $("#frmBuscarPartida").submit(procesarBusquedaPartida);
         });
     </script>
 {% endblock %}

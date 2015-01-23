@@ -76,10 +76,26 @@ class partidaController extends Controller {
         ));
     }
 
+    public function buscarAction(Request $request) {
+        $em = $this->getDoctrine()->getManager();
+        $data = array();
+        
+        $data['partida'] = $em->createQuery("SELECT p FROM LCCMainBundle:partidas p WHERE p.sucursal = :sucursal AND p.codigo = :codigo")
+                ->setParameter('sucursal', $request->get('cmbSucursal'))
+                ->setParameter('codigo', $request->get('txtCodigoPartida'))
+                ->getOneOrNullResult();
+        
+        if (count($data['partida'])) {
+            $data['transacciones'] = $em->createQuery("SELECT t FROM LCCMainBundle:transacciones t WHERE t.partida = :partida")
+                ->setParameter('partida', $data['partida']->getId())
+                ->getResult();
+        }
+        
+        return $this->render('LCCMainBundle:partida:vistaPartida.html.twig', array('data' => $data));
+    }
+    
     public function showAction() {
-        return $this->render('LCCMainBundle:partida:show.html.twig', array(
-                        // ...
-        ));
+        return $this->render('LCCMainBundle:partida:show.html.twig', array());
     }
 
     private function runSave(Request $request) {

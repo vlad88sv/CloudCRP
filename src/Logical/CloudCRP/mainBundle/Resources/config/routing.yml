@@ -34,13 +34,17 @@ lcc_main_establecer_empresa:
     pattern:  /cambioEmpresa
     defaults: { _controller: LCCMainBundle:Default:cambioEmpresa }
 
-lcc_partida_codigo:
-    path:     /partida/buscar/codigo
-    defaults: { _controller: LCCMainBundle:partida:buscarCodigo }
-
 lcc_partida:
     path:     /partida
     defaults: { _controller: LCCMainBundle:partida:index}
+
+lcc_partida_buscar:
+    path:     /partida/buscar
+    defaults: { _controller: LCCMainBundle:partida:buscar }
+
+lcc_partida_codigo:
+    path:     /partida/buscar/codigo
+    defaults: { _controller: LCCMainBundle:partida:buscarCodigo }
 
 lcc_partida_fecha:
     path:     /partida/buscar/fecha
