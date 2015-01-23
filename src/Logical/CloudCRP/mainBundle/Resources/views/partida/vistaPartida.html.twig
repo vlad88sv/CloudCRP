@@ -1,8 +1,9 @@
 {% if (data.partida is not defined or data.transacciones is not defined) %}
     <p class="bg-danger">No se encontró datos para la partida especificada</p>
-{% endif %}
+{% else %}
 <h3>Partida</h1>
 <table class="table table-bordered">
+    <tr><th class="text-right" style="width:200px">Sucursal</th><td>{{data.partida.sucursal.nombre}}</td></tr>
     <tr><th class="text-right" style="width:200px">Codigo partida</th><td>{{data.partida.codigo}}</td></tr>
     <tr><th class="text-right">Fecha creada</th><td>{{data.partida.creado|date('h:ip, d-m-Y') }}</td></tr>
     <tr><th class="text-right">Fecha actualizada</th><td>{{data.partida.actualizado|date('h:ip, d-m-Y') }}</td></tr>
@@ -24,3 +25,4 @@
     </tr>
     {% endfor %}
 </table>
+{% endif %}

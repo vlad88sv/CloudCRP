@@ -81,9 +81,10 @@ class partidaController extends Controller {
         $data = array();
         $data['cuadre'] = 0;
         
-        $data['partida'] = $em->createQuery("SELECT p FROM LCCMainBundle:partidas p WHERE p.sucursal = :sucursal AND p.codigo = :codigo")
+        $data['partida'] = $em->createQuery("SELECT p FROM LCCMainBundle:partidas p WHERE p.sucursal = :sucursal AND (p.codigo = :codigo OR p.fecha = :fecha)")
                 ->setParameter('sucursal', $request->get('cmbSucursal'))
-                ->setParameter('codigo', $request->get('txtCodigoPartida'))
+                ->setParameter('codigo', $request->get('txtCodigoPartida', 0))
+                ->setParameter('fecha', $request->get('txtPartidaFecha', ''))
                 ->getOneOrNullResult();
         
         if (count($data['partida'])) {

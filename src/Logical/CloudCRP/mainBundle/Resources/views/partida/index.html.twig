@@ -20,19 +20,27 @@
                     <td class="text-bold">{{ row.codigo }}</td>
                     <td>{{ row.creado|date('h:ip, d-m-Y') }}</td>
                     <td>{{ row.actualizado|date('h:ip, d-m-Y') }}</td>
-                    <td><a href="{{ path('lcc_partida_edit', {'id' : row.id}) }}" aria-hidden="true" class="glyphicon glyphicon-edit" style="cursor: pointer"></a></td>
+                    <td>
+                        <a href="{{ path('lcc_partida_edit', {'id' : row.id}) }}" aria-hidden="true" class="glyphicon glyphicon-edit" style="cursor: pointer"></a>
+                        <a href="{{ path('lcc_partida_buscar') }}?cmbSucursal={{ row.sucursal.id }}&txtCodigoPartida={{ row.codigo }}" aria-hidden="true" class="glyphicon glyphicon-search mtrigger" style="cursor: pointer"></a>
+                    </td>
                 </tr>    
             {% endfor %}
         </tbody>
 
     </table>
-
+<div id="dialog"></div>
 {% endblock %}
 
 {% block javascripts %}
     <script type="text/javascript">
         $(function () {
             $("#tblCuentas").DataTable();
+            $(".mtrigger").click(function(e){
+               e.preventDefault();
+               $("#dialog").dialog({width: 800, height:800, modal: true}).dialog('open').load($(this).attr('href'));
+               return false;
+            });
         });
     </script>
 {% endblock %}
