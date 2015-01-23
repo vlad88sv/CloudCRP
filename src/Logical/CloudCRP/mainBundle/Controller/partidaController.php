@@ -79,6 +79,7 @@ class partidaController extends Controller {
     public function buscarAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
         $data = array();
+        $data['cuadre'] = 0;
         
         $data['partida'] = $em->createQuery("SELECT p FROM LCCMainBundle:partidas p WHERE p.sucursal = :sucursal AND p.codigo = :codigo")
                 ->setParameter('sucursal', $request->get('cmbSucursal'))
@@ -89,6 +90,13 @@ class partidaController extends Controller {
             $data['transacciones'] = $em->createQuery("SELECT t FROM LCCMainBundle:transacciones t WHERE t.partida = :partida")
                 ->setParameter('partida', $data['partida']->getId())
                 ->getResult();
+        }
+        
+        if (count($data['transacciones'])) {
+            foreach ($data['transacciones'] as $transaccion)
+            {
+                $data['cuadre'] += (double) $transaccion->getMonto() * ($transaccion->getTipo() ? 1 : -1) ;
+            }
         }
         
         return $this->render('LCCMainBundle:partida:vistaPartida.html.twig', array('data' => $data));

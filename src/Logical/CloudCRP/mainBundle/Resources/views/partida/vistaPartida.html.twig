@@ -6,6 +6,7 @@
     <tr><th class="text-right" style="width:200px">Codigo partida</th><td>{{data.partida.codigo}}</td></tr>
     <tr><th class="text-right">Fecha creada</th><td>{{data.partida.creado|date('h:ip, d-m-Y') }}</td></tr>
     <tr><th class="text-right">Fecha actualizada</th><td>{{data.partida.actualizado|date('h:ip, d-m-Y') }}</td></tr>
+    <tr><th class="text-right">Cuadre</th><td>{{data.cuadre|number_format(2, '.', ',')}}</td></tr>
 </table>
 <h3>Transacciones</h1>
 <table style="width:600px;border-collapse: collapse">
