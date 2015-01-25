@@ -61,3 +61,7 @@ lcc_partida_edit:
 lcc_partida_show:
     path:     /partida/mostrar
     defaults: { _controller: LCCMainBundle:partida:show }
+
+lcc_reportes:
+    path:     /reporte/ver/{id}
+    defaults: { _controller: LCCMainBundle:reportes:mostrar }
