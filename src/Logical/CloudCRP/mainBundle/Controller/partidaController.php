@@ -22,7 +22,7 @@ class partidaController extends Controller {
         $data['cuentas'] = $em->createQuery("SELECT c FROM LCCMainBundle:cuentas c WHERE c.empresa = :id_empresa")->setParameter("id_empresa", $iEmpresa)->getResult();
         $data['clases'] = $em->createQuery("SELECT cc FROM LCCMainBundle:cuentasClase cc")->getResult();
         $data['sucursales'] = $em->createQuery("SELECT s FROM LCCMainBundle:sucursales s WHERE s.empresa = :id_empresa")->setParameter("id_empresa", $iEmpresa)->getResult();
-
+        
         //$ultimoNoPartida = $em->createQuery("SELECT p.codigo FROM LCCMainBundle:partidas p ORDER BY p.codigo DESC")->getSingleScalarResult();
 
         return $this->render('LCCMainBundle:partida:new.html.twig', array('data' => $data));
@@ -51,7 +51,12 @@ class partidaController extends Controller {
         $data['clases'] = $em->createQuery("SELECT cc FROM LCCMainBundle:cuentasClase cc")->getResult();
         $data['sucursales'] = $em->createQuery("SELECT s FROM LCCMainBundle:sucursales s WHERE s.empresa = :id_empresa")->setParameter("id_empresa", $iEmpresa)->getResult();
 
-        $data['partida'] = $em->createQuery("SELECT p FROM LCCMainBundle:partidas p WHERE p.id = :id")->setParameter('id', $id)->getSingleResult();
+        $data['partida'] = $em->createQuery("SELECT p FROM LCCMainBundle:partidas p WHERE p.id = :id")->setParameter('id', $id)->getOneOrNullResult();
+        
+        if (count($data['partida']))
+        {
+            $data['transacciones'] = $em->createQuery("SELECT t FROM LCCMainBundle:transacciones t WHERE t.partida = :partida")->setParameter('partida', $data['partida']->getId())->getResult();
+        }        
 
         return $this->render('LCCMainBundle:partida:new.html.twig', array('data' => $data));
     }
@@ -128,6 +133,13 @@ class partidaController extends Controller {
         $partida->setActualizado(new \DateTime());
         $em->persist($partida);
 
+        
+        
+        // Borrar todas las partidas para su reingreso, esto soluciona la edición
+        $em->createQuery('DELETE FROM LCCMainBundle:transacciones t WHERE t.partida = :partida')
+                ->setParameter('partida', $partida->getId())
+                ->getResult();
+        
         foreach ($request->get('transacciones') as $transaccion) {
             $docTransaccion = new transacciones();
             $docTransaccion->setPartida($partida);
