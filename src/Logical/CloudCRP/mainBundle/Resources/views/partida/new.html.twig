@@ -161,7 +161,6 @@
                 }
 
                 for (index = 0; index < transacciones.length; ++index) {
-                    console.log(transacciones[index]);
                     var monto = parseFloat(transacciones[index]['monto']).toFixed(2);
                     var tr = $('<tr>').attr('rel', index);
                     tr.append($('<td>').html(transacciones[index]['cuenta']));
@@ -208,7 +207,7 @@
             }
 
             function eliminarTransaccion() {
-                transacciones.splice(parseInt($(this).attr('rel')), 1);
+                transacciones.splice(parseInt($(this).parents('tr').attr('rel')), 1);
                 hacerCargarGridTransacciones();
             }
 
