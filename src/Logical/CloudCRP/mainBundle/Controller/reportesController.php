@@ -16,9 +16,8 @@ class reportesController extends Controller {
     public function mostrarAction(Request $request, $id) {
         $render = null;
         
-        $this->data['fechaInicio'] = $request->get('txtFechaInicial', date('Y-m-01'));
+        $this->data['fechaInicial'] = $request->get('txtFechaInicial', date('Y-m-01'));
         $this->data['fechaFinal'] = $request->get('txtFechaFinal', date('Y-m-t'));
-
 
         switch ($id) {
             case '1':
@@ -56,8 +55,20 @@ class reportesController extends Controller {
     private function reporte1() {
         // Este reporte contiene el resumen por cada cuenta de tipo mayor
         $em = $this->getDoctrine()->getManager();
+
+        /*
+        $result = $em->createQuery('SELECT p FROM LCCMainBundle:partidas p WHERE p.sucursal IN (SELECT e.id FROM LCCMainBundle:empresas e WHERE e.id = :id_empresa ) AND p.fecha >= :fechaInicial AND p.fecha <= :fechaFinal')
+                ->setParameter('id_empresa', $this->get('session')->get('global_empresa_id'))
+                ->setParameter('fechaInicial',$this->data['fechaInicial'])
+                ->setParameter('fechaFinal',$this->data['fechaFinal'])
+                ->getResult();
+        */
         
-        $result = $em->createQuery('SELECT * FROM LCCMainBundle:partidas WHERE fecha >= :fechaInicial AND fecha <= :fechaFinal');
+        $result = $em->createQuery('SELECT t FROM LCCMainBundle:transacciones t JOIN LCCMainBundle:partidas p WITH t.partida = p.id WHERE p.sucursal IN (SELECT e.id FROM LCCMainBundle:empresas e WHERE e.id = :id_empresa ) AND p.fecha >= :fechaInicial AND p.fecha <= :fechaFinal')
+                ->setParameter('id_empresa', $this->get('session')->get('global_empresa_id'))
+                ->setParameter('fechaInicial',$this->data['fechaInicial'])
+                ->setParameter('fechaFinal',$this->data['fechaFinal'])
+                ->getResult();
         
         return $this->renderView('LCCMainBundle:reportes:libroAuxiliarDelMayor.html.twig', array('data' => $this->data));
     }
